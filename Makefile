@@ -6,35 +6,22 @@
 #    By: tokazaki <tokazaki@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 23:29:09 by tokazaki          #+#    #+#              #
-#    Updated: 2024/02/05 16:55:14 by tokazaki         ###   ########.fr        #
+#    Updated: 2024/08/04 12:01:40 by tokazaki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SUBDIRS := $(wildcard */)
+run:
+	docker compose -f ./src/docker-compose.yml up --build -d
 
-.PHONY: all clean fclean $(SUBDIRS)
+down:
+	docker compose -f ./src/docker-compose.yml down
 
-all: $(SUBDIRS)
+re:
+	docker compose -f ./src/docker-compose.yml down
+	docker compose -f ./src/docker-compose.yml up --build -d
 
-$(SUBDIRS):
-	@echo "Make..."
-	$(MAKE) -C $@
-
-clean:
-	@echo "Cleaning up..."
-	for dir in $(SUBDIRS); do \
-        $(MAKE) -C $$dir clean; \
-    done
-
-fclean:
-	@echo "Fully cleaning up..."
-	for dir in $(SUBDIRS); do \
-		$(MAKE) -C $$dir fclean; \
-		done
-
-format: 
-	@for dir in $(SUBDIRS); do \
-		$(MAKE) -C $$dir format; \
-	done
-
-
+memo:
+	echo " service --status-all "
+	echo " service mysql start "
+	echo " service nginx start "
+	echo " service php7.4-fpm start "cat: ../incep/all-in-one: Is a directory
