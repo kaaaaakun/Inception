@@ -1,4 +1,5 @@
 version: "3.4"
+
 services:
   nginx:
     build: requirements/nginx
@@ -9,11 +10,16 @@ services:
       mariadb:
         condition: service_healthy
     ports:
-      - 80:80
+      - 443:443
     volumes:
       - ./web:/var/www/html
     networks:
       - inception
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail https://localhost || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   wordpress:
     build: requirements/wordpress
@@ -49,3 +55,4 @@ services:
 networks:
   inception:
     driver: bridge
+
