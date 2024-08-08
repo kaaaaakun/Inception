@@ -6,7 +6,7 @@
 #    By: tokazaki <tokazaki@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 23:29:09 by tokazaki          #+#    #+#              #
-#    Updated: 2024/08/08 14:56:35 by tokazaki         ###   ########.fr        #
+#    Updated: 2024/08/08 15:16:14 by tokazaki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,3 +33,6 @@ stop:
 	$(DOCKER_COMPOSE) stop
 
 PHONY: run re build up down start stop
+
+memo:
+	@echo "https://localhost/wp-admin/index.php"
