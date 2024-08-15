@@ -6,12 +6,16 @@
 #    By: tokazaki <tokazaki@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/04 23:29:09 by tokazaki          #+#    #+#              #
-#    Updated: 2024/08/08 15:16:14 by tokazaki         ###   ########.fr        #
+#    Updated: 2024/08/16 01:07:10 by tokazaki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DOCKER_COMPOSE = docker compose -f ./srcs/docker-compose.yml
 
+init: cert build up
+
+fclean: down
+	rm -rf ./srcs/requirements/nginx/ssl
 
 run:build up
 
@@ -32,7 +36,11 @@ start:
 stop:
 	$(DOCKER_COMPOSE) stop
 
-PHONY: run re build up down start stop
+cert:
+	make -C ./srcs/requirements/nginx/tools
+
+
+PHONY: run re build up down start stop fclean cert
 
 memo:
 	@echo "https://localhost/wp-admin/index.php"
