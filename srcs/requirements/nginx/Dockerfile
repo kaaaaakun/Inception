@@ -5,15 +5,11 @@
 FROM debian:latest
 
 # 必要なパッケージのインストール
-RUN apt-get update && apt-get install -y nginx openssl
-
-# 証明書と秘密鍵を生成
-RUN openssl genpkey -algorithm RSA -out /etc/ssl/private/selfsigned.key && \
-    openssl req -new -key /etc/ssl/private/selfsigned.key -out /etc/ssl/private/selfsigned.csr -subj "/C=US/ST=State/L=City/O=Company/OU=Department/CN=localhost" && \
-    openssl x509 -req -days 365 -in /etc/ssl/private/selfsigned.csr -signkey /etc/ssl/private/selfsigned.key -out /etc/ssl/certs/selfsigned.crt
+RUN apt-get update && apt-get install -y nginx 
 
 # Nginxの設定ファイルをコピー
 COPY ./conf/default /etc/nginx/sites-available/default
+COPY ./ssl/* /etc/ssl/
 
 # Nginxをデフォルトで起動
 CMD ["nginx", "-g", "daemon off;"]
