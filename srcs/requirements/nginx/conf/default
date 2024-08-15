@@ -95,7 +95,7 @@ server {
     listen 443 ssl default_server;
     listen [::]:443 ssl default_server;
 
-  	server_name www.tokazaki.42.fr tokazaki.42.fr;
+  	server_name www.$(DOMAIN_NAME) $(DOMAIN_NAME);
 
 
     # SSL証明書の設定
