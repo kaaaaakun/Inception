@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-DOCKER_COMPOSE = docker compose -f ./src/docker-compose.yml
+DOCKER_COMPOSE = docker compose -f ./srcs/docker-compose.yml
 
 
 run:build up
