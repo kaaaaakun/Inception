@@ -16,8 +16,7 @@ services:
     networks:
       - inception
     healthcheck:
-      test: CMD-SHELL curl --silent --fail https://tokazaki.42.fr && \
-        curl --silent --fail https://www.tokazaki.42.fr || exit 1
+      test: ["CMD-SHELL", "curl --silent --fail https://tokazaki.42.fr && curl --silent --fail https://www.tokazaki.42.fr || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -29,11 +28,7 @@ services:
       mariadb:
         condition: service_healthy
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          'php -r ''exit(function_exists("mysqli_connect") ? 0 : 1);''',
-        ]
+      test: ["CMD-SHELL", "php -r 'exit(function_exists(\"mysqli_connect\") ? 0 : 1);'"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -62,3 +57,4 @@ networks:
 volumes:
   wordpress_data:
   mariadb_data:
+

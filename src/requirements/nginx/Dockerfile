@@ -1,11 +1,11 @@
 #FROM debian:latest
-#RUN apt update && apt update && apt install -y nginx
+#RUN apt-get update && apt-get update && apt-get install -y nginx
 #COPY ./conf/default /etc/nginx/sites-available/
 #CMD ["nginx", "-g", "daemon off;"]
 FROM debian:latest
 
 # 必要なパッケージのインストール
-RUN apt update && apt install -y nginx openssl
+RUN apt-get update && apt-get install -y nginx openssl
 
 # 証明書と秘密鍵を生成
 RUN openssl genpkey -algorithm RSA -out /etc/ssl/private/selfsigned.key && \

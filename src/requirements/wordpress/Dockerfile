@@ -1,6 +1,6 @@
 FROM debian:latest
-RUN apt update && apt update 
-RUN apt install -y \
+RUN apt-get update 
+RUN apt-get install -y \
         php8.2-fpm \
         php8.2-mysqli \
         curl
