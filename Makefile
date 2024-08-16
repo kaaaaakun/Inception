@@ -12,6 +12,8 @@
 
 DOCKER_COMPOSE = docker compose -f ./srcs/docker-compose.yml
 
+all: run
+
 init: cert build up
 
 fclean: down
