@@ -14,7 +14,11 @@ services:
     networks:
       - inception
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail https://$(DOMAIN_NAME) && curl --silent --fail https://www.$(DOMAIN_NAME) || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent --fail https://${DOMAIN_NAME} && curl --silent --fail https://www.${DOMAIN_NAME} || exit 1",
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -25,8 +29,21 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
+    environment:
+      - URL=${URL}
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASS=${ADMIN_PASS}
+      - ADMIN_MAIL=${ADMIN_MAIL}
+      - USER_NAME=${USER_NAME}
+      - USER_PASS=${USER_PASS}
+      - USER_MAIL=${USER_MAIL}
+      - USER_ROLE=${USER_ROLE}
     healthcheck:
-      test: ["CMD-SHELL", "php -r 'exit(function_exists(\"mysqli_connect\") ? 0 : 1);'"]
+      test:
+        [
+          "CMD-SHELL",
+          'php -r ''exit(function_exists("mysqli_connect") ? 0 : 1);''',
+        ]
       interval: 10s
       timeout: 5s
       retries: 3
