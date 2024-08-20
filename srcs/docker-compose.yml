@@ -5,6 +5,8 @@ services:
     depends_on:
       wordpress:
         condition: service_healthy
+      redis:
+        condition: service_healthy
       mariadb:
         condition: service_healthy
     ports:
@@ -22,6 +24,28 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+
+  redis:
+    build: requirements/bonus/redis
+    container_name: redis
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 1s
+      timeout: 3s
+      retries: 5
+
+  adminer:
+    build: requirements/bonus/adminer
+    container_name: adminer
+    networks:
+      - inception
+    ports:
+      - 8080:8080
+    depends_on:
+      mariadb:
+        condition: service_healthy
 
   wordpress:
     build: requirements/wordpress
