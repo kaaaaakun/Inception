@@ -29,6 +29,9 @@ build:
 up:
 	$(DOCKER_COMPOSE) up -d
 
+fdown:
+	$(DOCKER_COMPOSE) down -v
+
 down:
 	$(DOCKER_COMPOSE) down
 
