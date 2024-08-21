@@ -1,15 +1,13 @@
 FROM debian:latest
 
-# MariaDB をインストール
-RUN apt-get update && \
-    apt-get install -y mariadb-server
+RUN apt-get update -y && apt-get install mariadb-server -y
 
-# 設定ファイルのコピー
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY ./conf/init.sql /etc/mysql/init.sql
+COPY ./conf/init.sh /
+RUN chmod +x /init.sh
 
-# 必要なディレクトリの作成
-RUN mkdir /run/mysqld
+RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
+RUN mkdir -p /var/log/mysql && chown mysql:mysql /var/log/mysql
 
-# MariaDB を起動
-CMD ["mysqld_safe"]
+CMD ["/bin/bash", "-c", "/init.sh && mysqld_safe"]
+

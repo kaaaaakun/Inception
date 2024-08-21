@@ -77,13 +77,24 @@ services:
       - inception
 
   mariadb:
-    build: requirements/mariadb
+    build:
+      context: requirements/mariadb
+      args:
+        - MYSQL_DB_NAME=${MYSQL_DB_NAME}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     container_name: mariadb
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost || exit 1"]
       interval: 5s
       timeout: 5s
       retries: 3
+    environment:
+      - MYSQL_DB_NAME=${MYSQL_DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -96,4 +107,3 @@ networks:
 volumes:
   wordpress_data:
   mariadb_data:
-
