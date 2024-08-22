@@ -19,12 +19,12 @@ init: cert build up
 fclean: down
 	rm -rf ./srcs/requirements/nginx/ssl
 
-run:build up
+run: build up
 
-re:down run
+re: down run
 
 build:
-	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) build --no-cache
 
 up:
 	$(DOCKER_COMPOSE) up -d
