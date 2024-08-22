@@ -9,7 +9,7 @@ chmod +x wp-cli.phar
 
 # WordPressのダウンロードと設定ファイル作成
 ./wp-cli.phar core download --allow-root
-./wp-cli.phar config create --dbname=wordpress --dbuser=wpuser --dbpass=password --dbhost=mariadb --allow-root
+./wp-cli.phar config create --dbname="$MYSQL_DB_NAME" --dbuser="$MYSQL_USER" --dbpass="$MYSQL_PASSWORD" --dbhost=mariadb --allow-root
 
 # WordPressのインストール（未インストールの場合のみ）
 ./wp-cli.phar core install --url="$URL" --title=inception --admin_user="$ADMIN_USER" --admin_password="$ADMIN_PASS" --admin_email="$ADMIN_MAIL" --allow-root
