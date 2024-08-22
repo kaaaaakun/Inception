@@ -107,7 +107,10 @@ services:
 networks:
   inception:
     driver: bridge
+    name: inception_net
 
 volumes:
   wordpress_data:
+    name: wordpress_vol
   mariadb_data:
+    name: mariadb_vol
