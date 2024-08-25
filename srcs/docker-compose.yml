@@ -78,8 +78,8 @@ services:
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     container_name: mariadb
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost || exit 1"]
-      interval: 5s
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD | grep 'mysqld is alive'"]
+      interval: 10s
       timeout: 5s
       retries: 3
     env_file: .env
