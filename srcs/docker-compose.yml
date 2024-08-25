@@ -53,19 +53,7 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
-    environment:
-      - URL=${URL}
-      - ADMIN_USER=${ADMIN_USER}
-      - ADMIN_PASS=${ADMIN_PASS}
-      - ADMIN_MAIL=${ADMIN_MAIL}
-      - USER_NAME=${USER_NAME}
-      - USER_PASS=${USER_PASS}
-      - USER_MAIL=${USER_MAIL}
-      - USER_ROLE=${USER_ROLE}
-      - MYSQL_DB_NAME=${MYSQL_DB_NAME}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    env_file: .env
     healthcheck:
       test:
         [
@@ -94,11 +82,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 3
-    environment:
-      - MYSQL_DB_NAME=${MYSQL_DB_NAME}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    env_file: .env
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
