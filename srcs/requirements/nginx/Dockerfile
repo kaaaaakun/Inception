@@ -1,8 +1,4 @@
-#FROM debian:latest
-#RUN apt-get update && apt-get update && apt-get install -y nginx
-#COPY ./conf/default /etc/nginx/sites-available/
-#CMD ["nginx", "-g", "daemon off;"]
-FROM debian:latest
+FROM debian:bullseye
 
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y nginx 

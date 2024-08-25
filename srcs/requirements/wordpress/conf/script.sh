@@ -18,4 +18,4 @@ chmod +x wp-cli.phar
 ./wp-cli.phar user create "$USER_NAME" "$USER_MAIL" --user_pass="$USER_PASS" --role="$USER_ROLE" --allow-root
 
 # php-fpmをフォアグラウンドで実行
-php-fpm8.2 -F
+php-fpm7.4 -F
