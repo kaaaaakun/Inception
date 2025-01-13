@@ -96,5 +96,13 @@ networks:
 volumes:
   wordpress_data:
     name: wordpress_vol
+    driver_opts:
+      type: none
+      device: ${HOME}/data/wordpress_data
+      o: bind
   mariadb_data:
     name: mariadb_vol
+    driver_opts:
+      type: none
+      device: ${HOME}/data/mariadb_data
+      o: bind

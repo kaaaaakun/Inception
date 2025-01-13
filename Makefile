@@ -27,6 +27,8 @@ build:
 	$(DOCKER_COMPOSE) build --no-cache
 
 up:
+	mkdir -p ${HOME}/data/mariadb_data
+	mkdir -p ${HOME}/data/wordpress_data
 	$(DOCKER_COMPOSE) up -d
 
 fdown:
