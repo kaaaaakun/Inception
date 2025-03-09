@@ -11,4 +11,5 @@ docker exec -it mariadb
 
 mysql -u  -p db_root_pass
 
-show datemase;
+show databases;
+select * from <database_name>;
