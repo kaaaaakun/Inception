@@ -14,7 +14,7 @@ DOCKER_COMPOSE = docker compose -f ./srcs/docker-compose.yml
 
 all: run
 
-init: cert build up
+init: pull_env cert build up
 
 fclean: down
 	rm -rf ./srcs/requirements/nginx/ssl
@@ -46,6 +46,13 @@ stop:
 cert:
 	make -C ./srcs/requirements/nginx/tools
 
+pull_env:
+	cd srcs && \
+	rm -rf .env && \
+	rm -rf env && \
+	git clone https://github.com/kaaaaakun/env.git && \
+	mv env/.env ./ && \
+	rm -rf env
 
 PHONY: run re build up down start stop fclean cert
 
